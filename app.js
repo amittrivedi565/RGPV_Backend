@@ -1,5 +1,4 @@
 const express = require('express')
-const cors = require('cors')
 const app = express()
 const bodyParser = require("body-parser")
 
@@ -13,11 +12,11 @@ app.use(express.urlencoded({ extended: true }))
 app.use("/public", express.static("public"));
 app.set("view engine", "ejs");
 
+app.use("/", require("./routes/notes.routes"));
 
 app.get("*", (req, res) => {
     res.status(404).render("../public/views/404");
   });
-
   
 const PORT = process.env.PORT || 3000
 
