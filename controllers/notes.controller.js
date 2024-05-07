@@ -1,6 +1,9 @@
 const homepageGet = async (req,res)=>
     {
-        res.render("../public/views/home")
+        const locals = {
+            title : "Welcome To RGPV Vault!"
+        }
+        res.render("../public/views/home",{locals})
     }
 
 module.exports = {
