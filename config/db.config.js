@@ -1,10 +1,12 @@
+const config = require("./config");
+
 module.exports = {
-    HOST: 'localhost',
-    USER : 'root',
-    port:8081,
-    PASSWORD :'Root@125502', 
-    DB : 'rgpv_backend',
-    dialect : 'mysql',
+    HOST: config.DB_HOST,
+    USER : config.DB_USER_NAME,
+    port: config.DB_PORT,
+    PASSWORD : config.DB_PSWD, 
+    DB : config.DB_NAME,
+    dialect : config.DB_DIALECT,
     pool : {
         max : 5,
         min : 0,

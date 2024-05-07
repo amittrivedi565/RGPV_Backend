@@ -11,8 +11,7 @@ const homepageGet = async (req, res) => {
 
 const sampleData = async (req, res) => {
   try {
-    const info = 
-    {
+    const info = {
       title: req.body.title,
     }
     const data = await Todo.create(info);
