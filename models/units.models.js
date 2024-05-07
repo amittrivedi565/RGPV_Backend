@@ -1,10 +1,14 @@
-
+const { subjects } = require(".")
 
 module.exports = (sequelize, DataTypes) => {
 
-    const Note = sequelize.define("Note", {
+    const Unit = sequelize.define("Unit", {
        
         name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        no: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -15,15 +19,19 @@ module.exports = (sequelize, DataTypes) => {
         tags: {
             type: DataTypes.STRING,
             allowNull: false
-        },
+        }, 
 
-        course_id: {
+        subject_id: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
+        note_url: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }
         
         
     })
-    return Note
+    return Unit
 
 }

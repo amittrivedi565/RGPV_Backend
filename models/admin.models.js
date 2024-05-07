@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
 
-    const Admin = sequelize.define("admin", {
+    const Admin = sequelize.define("Admin", {
        
         name: {
             type: DataTypes.STRING,
@@ -9,12 +9,8 @@ module.exports = (sequelize, DataTypes) => {
         pswd: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-        lastlogin: {
-            
-        },
-        
+        }
     })
-    return Test
+    return Admin
 
 }
