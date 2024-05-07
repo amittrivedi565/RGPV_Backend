@@ -26,9 +26,20 @@ sequelize.authenticate()
 const db = {}
 
 db.Sequelize = Sequelize 
+
 db.sequelize = sequelize 
 
 db.admins = require('./admin.models')(sequelize,DataTypes)
+
+db.courses = require('./courses.models')(sequelize,DataTypes)
+
+db.branches = require('./branches.models')(sequelize,DataTypes)
+
+db.sems = require('./sem.models')(sequelize,DataTypes)
+
+db.subjects = require('./sub.models')(sequelize,DataTypes)
+
+db.units = require('./units.models')(sequelize,DataTypes)
 
 
 

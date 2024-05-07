@@ -1,8 +1,6 @@
-
-
 module.exports = (sequelize, DataTypes) => {
 
-    const Note = sequelize.define("Note", {
+    const Course = sequelize.define("Course", {
        
         name: {
             type: DataTypes.STRING,
@@ -16,14 +14,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-
-        course_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        
         
     })
-    return Note
+    return Course
 
 }

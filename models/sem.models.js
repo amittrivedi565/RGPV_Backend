@@ -1,10 +1,12 @@
-
-
 module.exports = (sequelize, DataTypes) => {
 
-    const Note = sequelize.define("Note", {
+    const Semester = sequelize.define("Semester", {
        
         name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        no: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -15,15 +17,15 @@ module.exports = (sequelize, DataTypes) => {
         tags: {
             type: DataTypes.STRING,
             allowNull: false
-        },
+        }, 
 
-        course_id: {
+        branch_id: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
         
         
     })
-    return Note
+    return Semester
 
 }
