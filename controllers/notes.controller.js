@@ -9,19 +9,6 @@ const homepageGet = async (req, res) => {
   res.render("../views/home", { locals });
 };
 
-const sampleData = async (req, res) => {
-  try {
-    const info = {
-      title: req.body.title,
-    }
-    const data = await Todo.create(info);
-    console.log(data);
-    res.send(data);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 module.exports = {
   homepageGet,
 };
