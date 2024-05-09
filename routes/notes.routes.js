@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const notesController = require('../controllers/notes.controller')
 
-// homepage route
-router.get('/',notesController.homepageGet)
+router.get('/',notesController.homepageGet.controller)
 
 module.exports = router

@@ -1,71 +1,60 @@
+const { celebrate, Joi, Segments } = require("celebrate");
+const authConfig = require("../config/auth.config");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const db = require("../models");
 
-const db = require('../models/index');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const SECRET_KEY = "VAULT";
+const signin = {
+    validator: celebrate({
+        [Segments.BODY]: Joi.object().keys({
+            email: Joi.string().required(),
+            password: Joi.string().required(),
+        }),
+    }),
+    controller: async (req, res) => {
+        const { email, password } = req.body;
+        try {
+            const existingUser = await db.admins.findOne({
+                where: { email: email },
+            });
 
+            if (!existingUser) {
+                return res.status(404).json({ message: "User not found!" });
+            }
 
-// User login
+            const matchPassword = await bcrypt.compare(
+                password,
+                existingUser.password
+            );
+            if (!matchPassword) {
+                return res
+                    .status(404)
+                    .json({ message: "Invalid credentionals" });
+            }
 
+            const token = jwt.sign(
+                { name: existingUser.name, email: existingUser.email, id: existingUser.id },
+                authConfig.JWT_SECRET_KEY,
+                {
+                    expiresIn: authConfig.JWT_TOKEN_EXP_TIME,
+                }
+            );
 
-
-const signInGet = async (req,res)=>
-  {
-  try {
-    res.render("../views/signin")
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-const signInPost =  async (req, res) => {
-try {
-const { name, pswd } = req.body;
-const user = await db.admins.findOne({ name : name });
-if (!user) {
-return res.status(401).json({ error: 'Authentication failed' });
-}
-const passwordMatch = await bcrypt.compare(pswd, user.pswd);
-if (!passwordMatch) {
-return res.status(401).json({ error: 'Authentication failed' });
-}
-const token = jwt.sign({ userId: user._id }, SECRET_KEY, {
-expiresIn: '1h',
-});
-res.render("../views/admin")
-} catch (error) {
-res.status(500).json({ error: 'Login failed' });
-}
+            res.status(201).json({
+                user: {
+                    id: existingUser.id,
+                    name: existingUser.name,
+                    email: existingUser.email,
+                },
+                token: token,
+            });
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({ message: "Something went wrong" });
+        }
+    },
 };
 
 module.exports = {
-  signInGet , signInPost
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    signin,
+};
