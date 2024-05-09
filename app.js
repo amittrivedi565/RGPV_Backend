@@ -1,7 +1,7 @@
 const config = require("./config/config");
 const express = require("express");
 const app = express();
-const bodyParser = require("body-parser");
+const bodyparser = require("body-parser");
 const cors = require('cors');
 const path = require('path');
 const { errors } = require("celebrate");
@@ -22,7 +22,7 @@ app.use(bodyParser.json({ limit: '50mb' }));
 // Set Static Folder
 app.use("/public", express.static(path.join(__dirname, '/public')));
 
-// Set the template engine as pug
+// Set the template engine as ejs
 app.set('view engine', 'ejs');
 
 // Set the views directory

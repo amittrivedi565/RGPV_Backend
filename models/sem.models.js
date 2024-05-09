@@ -21,7 +21,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-
         branch_id: {
             type: DataTypes.INTEGER,
             allowNull: false,

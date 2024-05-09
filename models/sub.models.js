@@ -21,7 +21,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-
         semester_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
