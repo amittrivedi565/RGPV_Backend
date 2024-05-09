@@ -1,31 +1,31 @@
 module.exports = (sequelize, DataTypes) => {
-
     const Semester = sequelize.define("Semester", {
-       
+        id: {
+            type: DataTypes.CHAR(36),
+            primaryKey: true,
+            allowNull: false,
+        },
         name: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
         },
         no: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
         },
         description: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
         },
         tags: {
             type: DataTypes.STRING,
-            allowNull: false
-        }, 
+            allowNull: false,
+        },
 
         branch_id: {
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: false,
         },
-        
-        
-    })
-    return Semester
-
-}
+    });
+    return Semester;
+};

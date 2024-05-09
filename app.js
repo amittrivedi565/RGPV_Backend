@@ -4,12 +4,10 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require('cors');
 const path = require('path');
+const { errors } = require("celebrate");
 
 const PORT = config.PORT || 3000;
 const HOST = config.HOST;
-
-// parse application/json
-app.use(bodyParser.json({ limit: '50mb' }));
 
 // CORS + BODY_PARSE
 const corsOptions = {
@@ -17,6 +15,9 @@ const corsOptions = {
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
+
+// parse application/json
+app.use(bodyParser.json({ limit: '50mb' }));
 
 // Set Static Folder
 app.use("/public", express.static(path.join(__dirname, '/public')));
@@ -27,9 +28,13 @@ app.set('view engine', 'ejs');
 // Set the views directory
 app.set('views', path.join(__dirname, 'views'));
 
-app.use("/", require("./routes/notes.routes"));
+// Routes
+app.use("/", require("./routes"));
 
-app.get("*", (req, res) => {
+// Handle celebrate error
+app.use(errors());
+
+app.use("*", (req, res) => {
     res.status(404).render("../views/404");
 });
 
