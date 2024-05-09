@@ -18,4 +18,7 @@ module.exports = {
     DB_PSWD: process.env.DB_PSWD,
     DB_NAME: process.env.DB_NAME,
     DB_DIALECT: process.env.DB_DIALECT,
+
+    JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
+    JWT_TOKEN_EXP_TIME: process.env.JWT_TOKEN_EXP_TIME
 };
