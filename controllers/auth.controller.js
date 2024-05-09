@@ -27,29 +27,44 @@ const signUp = async (req, res) => {
   }
 };
 
-const signIn = async (req, res) => {
+
+
+
+const signInGet = async (req,res)=>{
+  try {
+    res.render("../views/signin")
+  } catch (error) {
+    
+  }
+}
+
+const signInPost = async (req, res) => {
   const { name, pswd } = req.body;
   try {
-    const existingUser = await db.admins.findOne({ name: name });
+    const existingUser = await db.admins.findOne({ name });
+
+
     if (!existingUser) {
-      return res.status(404).json({ message: "User not found!" });
+      return res.status(401).json({ message: "User not found!" });
     }
 
     const matchPassword = await bcrypt.compare(pswd, existingUser.pswd);
-    {
+    
       if (!matchPassword) {
         return res.status(404).json({ message: "Invalid credentionals" });
       }
       const token = jwt.sign(
         { name: existingUser.name, id: existingUser._id },
-        SECRET_KEY
+        SECRET_KEY , {expiresIn :'.25h'}
       );
-      res.status(201).json({ user: existingUser, token: token });
-    }
+
+    
+      res.render("../views/admin")
+    
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Something Went Wrong" });
   }
 };
 
-module.exports = { signIn, signUp };
+module.exports = { signInGet ,signInPost , signUp };
