@@ -17,7 +17,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // parse application/json
-app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyparser.json({ limit: '50mb' }));
 
 // Set Static Folder
 app.use("/public", express.static(path.join(__dirname, '/public')));
